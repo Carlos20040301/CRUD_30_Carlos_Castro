@@ -9,14 +9,14 @@ class MyDatabase:
             host="localhost",                    
             user="root", 
             passwd="", 
-            database="db_demo")
+            database="db_banco")
         return connection
 
-    def insert_db(self, nombre, edad, genero):
+    def insert_db(self, n_cuenta, id_usuario, edad, nombre_apellido,contrasena):
         my_connection = self.open_connection()
         cursor = my_connection.cursor()
-        query = "INSERT INTO tbl_usuarios(NOMBRE, EDAD, GENERO) VALUES (%s,%s,%s)"
-        data = (nombre, edad, genero)
+        query = "INSERT INTO tbl_usuarios(N_CUENTA, ID_USUARIO, EDAD,NOMBRE_APELLIDO, CONTRASENA) VALUES (%s,%s,%s,%s,%s)"
+        data = (n_cuenta, id_usuario, edad, nombre_apellido,contrasena)
         cursor.execute(query, data)
         my_connection.commit()
         my_connection.close()
@@ -24,7 +24,7 @@ class MyDatabase:
     def read_db(self):
         my_connection = self.open_connection()
         cursor = my_connection.cursor()
-        query = "SELECT NOMBRE, EDAD, GENERO FROM TBL_USUARIOS"
+        query = "SELECT N_CUENTA, ID_USUARIO, EDAD,NOMBRE_APELLIDO, CONTRASENA FROM TBL_USUARIOS"
         cursor.execute(query)
         registro = 0
         for fila in cursor:
